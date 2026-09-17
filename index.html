@@ -14,23 +14,24 @@
 
   /undangan-azizah-valdy.html
   /assets/
-      background.mp4        -> video prewedding, jadi background di SEMUA section sepanjang scroll
-      background-poster.jpg -> foto prewedding (dipakai selagi video loading / di HP hemat data)
-      bride.jpg              -> foto Azizah
-      groom.jpg               -> foto Valdy
+      background.mp4         -> video prewedding, dipakai sebagai background di COVER dan hero
+      background-poster.jpg  -> foto prewedding, jadi fallback/poster sebelum video-nya loading
+      bride.jpg               -> foto Azizah
+      groom.jpg                -> foto Valdy
       gallery-1.jpg ... gallery-6.jpg   -> 6 foto prewedding untuk galeri
 
   Nama file HARUS persis sama (huruf kecil semua). Kalau video belum ada,
   background otomatis pakai background-poster.jpg saja, tetap rapi.
-  Videonya satu saja (bukan satu per section) — supaya ringan di HP dan
-  kuota tamu, videonya fixed di belakang layar dan kelihatan sedikit di
-  tiap section lewat lapisan warna transparan di atasnya.
+
+  MUSIK: pakai lagu dari YouTube (video ID: uJRImJQmfo0), otomatis muter
+  begitu tamu klik "Buka Undangan". Nggak perlu file mp3 — tapi jaringan
+  internet tamu harus nyala pas buka undangan karena playernya dari YouTube.
   ===================================================================
 -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
   :root{
@@ -135,15 +136,32 @@
   /* ---------------- open gate (pre-open cover) ---------------- */
   #gate{
     position:fixed; inset:0; z-index:100;
-    background:rgba(28,43,30,0.82);
+    background:var(--forest-d);
     color:var(--cream);
+    overflow:hidden;
+    transition:opacity 0.9s ease, visibility 0.9s ease;
+  }
+  #gate.hidden{ opacity:0; visibility:hidden; pointer-events:none; }
+  .gate-bg{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit:cover;
+    z-index:0;
+  }
+  #gate::after{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(28,43,30,0.5) 0%, rgba(20,31,21,0.8) 100%);
+    z-index:1;
+  }
+  .gate-content{
+    position:relative; z-index:2;
+    height:100%;
     display:flex; flex-direction:column; align-items:center; justify-content:center;
     text-align:center;
     gap:22px;
     padding:32px;
-    transition:opacity 0.9s ease, visibility 0.9s ease;
   }
-  #gate.hidden{ opacity:0; visibility:hidden; pointer-events:none; }
   #gate .eyebrow{ color:var(--sage-lt); }
   #gate h1{
     color:var(--cream);
@@ -245,7 +263,7 @@
   #quote{
     padding:88px 0 70px;
     text-align:center;
-    background:rgba(250,248,241,0.90);
+    background:var(--cream);
   }
   #quote p{
     font-family:var(--serif);
@@ -267,7 +285,7 @@
   /* ---------------- couple ---------------- */
   #couple{
     padding:20px 0 90px;
-    background:rgba(250,248,241,0.90);
+    background:var(--cream);
   }
   .couple-grid{
     display:grid;
@@ -276,6 +294,16 @@
   }
   @media (min-width:640px){
     .couple-grid{ grid-template-columns:1fr auto 1fr; align-items:center; gap:28px; }
+  }
+
+  /* ---------------- tighten up on narrow phones ---------------- */
+  @media (max-width:380px){
+    .wrap{ padding:0 20px; }
+    .palette-row{ gap:22px; }
+    .swatch-lg{ width:44px; height:44px; }
+    #gate h1{ font-size:clamp(34px,11vw,52px); }
+    #musicToggle{ width:42px; height:42px; }
+    #musicToggle svg{ width:17px; height:17px; }
   }
   .person{ text-align:center; }
   .person .photo{
@@ -304,7 +332,7 @@
 
   /* ---------------- event ---------------- */
   #event{
-    background:rgba(46,70,48,0.88);
+    background:var(--forest);
     color:var(--cream);
     padding:80px 0;
   }
@@ -373,7 +401,7 @@
   }
 
   /* ---------------- gallery ---------------- */
-  #gallery{ padding:90px 0; background:rgba(250,248,241,0.90); }
+  #gallery{ padding:90px 0; background:var(--cream); }
   #gallery h2{
     text-align:center;
     font-size:clamp(30px,6vw,38px);
@@ -418,35 +446,40 @@
 
   /* ---------------- details (dress code / theme) ---------------- */
   #details{
-    background:rgba(241,237,224,0.90);
+    background:var(--ivory);
     padding:80px 0;
     text-align:center;
   }
   #details h2{ font-size:clamp(28px,6vw,34px); }
   #details .eyebrow{ display:block; }
-  .chip-row{
-    margin-top:36px;
+  .palette-row{
+    margin-top:40px;
     display:flex;
     justify-content:center;
-    gap:16px;
+    gap:36px;
     flex-wrap:wrap;
   }
-  .chip{
-    background:var(--cream);
-    border:1px solid var(--line);
-    padding:22px 26px;
-    min-width:150px;
+  .swatch-item{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:12px;
   }
-  .chip .label{
-    font-size:11px; letter-spacing:0.14em; color:var(--sage);
-    margin-bottom:12px;
+  .swatch-lg{
+    width:54px; height:54px;
+    border-radius:50%;
+    box-shadow:var(--shadow);
+    border:1px solid rgba(255,255,255,0.6);
   }
-  .swatches{ display:flex; justify-content:center; gap:8px; }
-  .swatch{ width:26px; height:26px; border-radius:50%; border:1px solid var(--line); }
-  .chip p{ margin-top:12px; font-size:14px; color:var(--ink); }
+  .swatch-item .swatch-label{
+    font-size:12px;
+    letter-spacing:0.1em;
+    color:var(--ink);
+    opacity:0.8;
+  }
 
   /* ---------------- gift ---------------- */
-  #gift{ padding:80px 0; text-align:center; background:rgba(250,248,241,0.90); }
+  #gift{ padding:80px 0; text-align:center; background:var(--cream); }
   #gift h2{ font-size:clamp(28px,6vw,34px); }
   #gift .eyebrow{ display:block; }
   #gift .intro{
@@ -487,7 +520,7 @@
 
   /* ---------------- closing ---------------- */
   #closing{
-    background:rgba(28,43,30,0.90);
+    background:var(--forest-d);
     color:var(--cream);
     padding:100px 0 60px;
     text-align:center;
@@ -522,6 +555,32 @@
     letter-spacing:0.14em;
     color:rgba(185,198,174,0.5);
   }
+
+  /* ---------------- music toggle ---------------- */
+  #musicToggle{
+    position:fixed;
+    right:calc(16px + env(safe-area-inset-right));
+    bottom:calc(16px + env(safe-area-inset-bottom));
+    z-index:60;
+    width:46px; height:46px;
+    border-radius:50%;
+    background:var(--forest-d);
+    border:1px solid rgba(250,248,241,0.3);
+    color:var(--cream);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    box-shadow:0 10px 26px rgba(20,31,21,0.35);
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(10px);
+    transition:opacity 0.5s ease, transform 0.5s ease, visibility 0.5s ease;
+  }
+  #musicToggle.show{ opacity:1; visibility:visible; transform:translateY(0); }
+  #musicToggle svg{ width:20px; height:20px; }
+  #musicToggle .icon-pause{ display:none; }
+  #musicToggle.playing .icon-play{ display:none; }
+  #musicToggle.playing .icon-pause{ display:block; }
+  #ytPlayer{ position:fixed; width:1px; height:1px; left:-9999px; top:-9999px; }
 </style>
 <noscript><style>.reveal{ opacity:1!important; transform:none!important; }</style></noscript>
 </head>
@@ -532,21 +591,40 @@
   <source src="assets/background.mp4" type="video/mp4">
 </video>
 
+<!-- ===================== MUSIK (YouTube, tersembunyi) ===================== -->
+<div id="ytPlayer"></div>
+<button id="musicToggle" type="button" aria-label="Putar/jeda musik">
+  <svg class="icon-play" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M9 17V6.6l10-1.8v10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="6.5" cy="17" r="2.5" stroke="currentColor" stroke-width="1.4"/>
+    <circle cx="16.5" cy="14.8" r="2.5" stroke="currentColor" stroke-width="1.4"/>
+  </svg>
+  <svg class="icon-pause" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="7" y="6" width="3.4" height="12" rx="1" fill="currentColor"/>
+    <rect x="13.6" y="6" width="3.4" height="12" rx="1" fill="currentColor"/>
+  </svg>
+</button>
+
 <!-- ===================== GATE / COVER ===================== -->
 <div id="gate">
-  <span class="eyebrow">THE WEDDING OF</span>
-  <h1>Azizah<br>&amp; Valdy</h1>
-  <div>
-    <div class="guest-label">KEPADA BAPAK / IBU / SAUDARA/I</div>
-    <div class="guest-name" id="guestName">Tamu Undangan</div>
+  <video class="gate-bg" autoplay muted loop playsinline poster="assets/background-poster.jpg">
+    <source src="assets/background.mp4" type="video/mp4">
+  </video>
+  <div class="gate-content">
+    <span class="eyebrow">THE WEDDING OF</span>
+    <h1>Azizah<br>&amp; Valdy</h1>
+    <div>
+      <div class="guest-label">KEPADA BAPAK / IBU / SAUDARA/I</div>
+      <div class="guest-name" id="guestName">Tamu Undangan</div>
+    </div>
+    <button id="openBtn" type="button">BUKA UNDANGAN</button>
   </div>
-  <button id="openBtn" type="button">BUKA UNDANGAN</button>
 </div>
 
 <!-- ===================== HERO ===================== -->
 <section id="hero">
   <div class="content wrap">
-    <span class="eyebrow">MENIKAHNYA</span>
+    <span class="eyebrow">THE WEDDING OF</span>
     <h1>Azizah<span class="amp">&amp;</span>Valdy</h1>
     <div class="date">31 JANUARI 2027</div>
     <div class="scroll-cue">SCROLL</div>
@@ -628,14 +706,18 @@
   <div class="wrap">
     <span class="eyebrow reveal">KETENTUAN</span>
     <h2 class="reveal">Dress Code</h2>
-    <div class="chip-row">
-      <div class="chip reveal">
-        <div class="label">WARNA BUSANA</div>
-        <div class="swatches">
-          <span class="swatch" style="background:#ffffff"></span>
-          <span class="swatch" style="background:#f2ead9"></span>
-        </div>
-        <p>Putih &amp; Cream</p>
+    <div class="palette-row reveal">
+      <div class="swatch-item">
+        <span class="swatch-lg" style="background:#ffffff"></span>
+        <span class="swatch-label">Putih</span>
+      </div>
+      <div class="swatch-item">
+        <span class="swatch-lg" style="background:#f2ead9"></span>
+        <span class="swatch-label">Cream</span>
+      </div>
+      <div class="swatch-item">
+        <span class="swatch-lg" style="background:#8b4a3a"></span>
+        <span class="swatch-label">Chestnut</span>
       </div>
     </div>
   </div>
@@ -667,6 +749,7 @@
   </div>
 </section>
 
+<script src="https://www.youtube.com/iframe_api"></script>
 <script>
   // ---- Gate open ----
   var params = new URLSearchParams(window.location.search);
@@ -674,10 +757,59 @@
   if(guest){
     document.getElementById('guestName').textContent = decodeURIComponent(guest);
   }
+
+  // ---- Musik (YouTube, ID: uJRImJQmfo0) ----
+  var ytPlayer = null;
+  var wantsPlay = false; // true kalau tamu sudah klik "Buka Undangan" tapi player belum siap
+  var musicToggle = document.getElementById('musicToggle');
+
+  function onYouTubeIframeAPIReady(){
+    ytPlayer = new YT.Player('ytPlayer', {
+      videoId: 'uJRImJQmfo0',
+      playerVars: {
+        autoplay: 0,
+        controls: 0,
+        disablekb: 1,
+        loop: 1,
+        playlist: 'uJRImJQmfo0'
+      },
+      events: {
+        onReady: function(){
+          if(wantsPlay){ ytPlayer.playVideo(); }
+        },
+        onStateChange: function(e){
+          if(e.data === YT.PlayerState.PLAYING){
+            musicToggle.classList.add('playing');
+            musicToggle.classList.add('show');
+          } else if(e.data === YT.PlayerState.PAUSED){
+            musicToggle.classList.remove('playing');
+          }
+        }
+      }
+    });
+  }
+
+  musicToggle.addEventListener('click', function(){
+    if(!ytPlayer || !ytPlayer.playVideo){ return; }
+    if(musicToggle.classList.contains('playing')){
+      ytPlayer.pauseVideo();
+    } else {
+      ytPlayer.playVideo();
+    }
+  });
+
   document.getElementById('openBtn').addEventListener('click', function(){
     document.getElementById('gate').classList.add('hidden');
     var v = document.getElementById('siteBg');
     if(v){ v.play().catch(function(){}); }
+    var gv = document.querySelector('.gate-bg');
+    if(gv){ gv.pause(); }
+
+    wantsPlay = true;
+    musicToggle.classList.add('show');
+    if(ytPlayer && ytPlayer.playVideo){
+      ytPlayer.playVideo();
+    }
   });
 
   // ---- Hormati preferensi "reduce motion": video jadi diam di frame poster ----
@@ -686,14 +818,15 @@
     if(bgVideo){ bgVideo.removeAttribute('autoplay'); bgVideo.pause(); }
   }
 
-  // ---- Scroll reveal ----
+  // ---- Scroll reveal (muncul lagi tiap discroll masuk viewport, dua arah) ----
   if('IntersectionObserver' in window){
     var revealItems = document.querySelectorAll('.reveal');
     var revealObserver = new IntersectionObserver(function(entries){
       entries.forEach(function(entry){
         if(entry.isIntersecting){
           entry.target.classList.add('in-view');
-          revealObserver.unobserve(entry.target);
+        } else {
+          entry.target.classList.remove('in-view');
         }
       });
     }, { threshold:0.18, rootMargin:'0px 0px -8% 0px' });
