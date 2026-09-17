@@ -14,8 +14,10 @@
 
   /undangan-azizah-valdy.html
   /assets/
-      background.mp4         -> video prewedding, dipakai sebagai background di COVER dan hero
-      background-poster.jpg  -> foto prewedding, jadi fallback/poster sebelum video-nya loading
+      background.mp4         -> video prewedding, jadi background di SEMUA section (hero sampai penutup)
+      background-poster.jpg  -> foto prewedding, dipakai sebagai BACKGROUND STATIS di halaman awal
+                                 (cover/gate, sebelum tamu klik "Buka Undangan"), juga jadi
+                                 fallback/poster video sebelum video-nya loading
       bride.jpg               -> foto Azizah
       groom.jpg                -> foto Valdy
       gallery-1.jpg ... gallery-6.jpg   -> 6 foto prewedding untuk galeri
@@ -136,24 +138,14 @@
   /* ---------------- open gate (pre-open cover) ---------------- */
   #gate{
     position:fixed; inset:0; z-index:100;
-    background:var(--forest-d);
+    background-image:linear-gradient(180deg, rgba(28,43,30,0.5) 0%, rgba(20,31,21,0.8) 100%), url('assets/background-poster.jpg');
+    background-size:cover;
+    background-position:center;
     color:var(--cream);
     overflow:hidden;
     transition:opacity 0.9s ease, visibility 0.9s ease;
   }
   #gate.hidden{ opacity:0; visibility:hidden; pointer-events:none; }
-  .gate-bg{
-    position:absolute; inset:0;
-    width:100%; height:100%;
-    object-fit:cover;
-    z-index:0;
-  }
-  #gate::after{
-    content:"";
-    position:absolute; inset:0;
-    background:linear-gradient(180deg, rgba(28,43,30,0.5) 0%, rgba(20,31,21,0.8) 100%);
-    z-index:1;
-  }
   .gate-content{
     position:relative; z-index:2;
     height:100%;
@@ -263,7 +255,7 @@
   #quote{
     padding:88px 0 70px;
     text-align:center;
-    background:var(--cream);
+    background:rgba(250,248,241,0.88);
   }
   #quote p{
     font-family:var(--serif);
@@ -285,7 +277,7 @@
   /* ---------------- couple ---------------- */
   #couple{
     padding:20px 0 90px;
-    background:var(--cream);
+    background:rgba(250,248,241,0.88);
   }
   .couple-grid{
     display:grid;
@@ -332,7 +324,7 @@
 
   /* ---------------- event ---------------- */
   #event{
-    background:var(--forest);
+    background:rgba(46,70,48,0.86);
     color:var(--cream);
     padding:80px 0;
   }
@@ -401,7 +393,7 @@
   }
 
   /* ---------------- gallery ---------------- */
-  #gallery{ padding:90px 0; background:var(--cream); }
+  #gallery{ padding:90px 0; background:rgba(250,248,241,0.88); }
   #gallery h2{
     text-align:center;
     font-size:clamp(30px,6vw,38px);
@@ -446,7 +438,7 @@
 
   /* ---------------- details (dress code / theme) ---------------- */
   #details{
-    background:var(--ivory);
+    background:rgba(241,237,224,0.88);
     padding:80px 0;
     text-align:center;
   }
@@ -479,7 +471,7 @@
   }
 
   /* ---------------- gift ---------------- */
-  #gift{ padding:80px 0; text-align:center; background:var(--cream); }
+  #gift{ padding:80px 0; text-align:center; background:rgba(250,248,241,0.88); }
   #gift h2{ font-size:clamp(28px,6vw,34px); }
   #gift .eyebrow{ display:block; }
   #gift .intro{
@@ -520,7 +512,7 @@
 
   /* ---------------- closing ---------------- */
   #closing{
-    background:var(--forest-d);
+    background:rgba(28,43,30,0.9);
     color:var(--cream);
     padding:100px 0 60px;
     text-align:center;
@@ -607,9 +599,6 @@
 
 <!-- ===================== GATE / COVER ===================== -->
 <div id="gate">
-  <video class="gate-bg" autoplay muted loop playsinline poster="assets/background-poster.jpg">
-    <source src="assets/background.mp4" type="video/mp4">
-  </video>
   <div class="gate-content">
     <span class="eyebrow">THE WEDDING OF</span>
     <h1>Azizah<br>&amp; Valdy</h1>
@@ -802,8 +791,6 @@
     document.getElementById('gate').classList.add('hidden');
     var v = document.getElementById('siteBg');
     if(v){ v.play().catch(function(){}); }
-    var gv = document.querySelector('.gate-bg');
-    if(gv){ gv.pause(); }
 
     wantsPlay = true;
     musicToggle.classList.add('show');
