@@ -45,7 +45,7 @@
 
   .bg-overlay {
     position: fixed; inset: 0;
-    background: radial-gradient(circle at center, rgba(250,247,242,0.2) 0%, rgba(30,40,25,0.6) 100%);
+    background: radial-gradient(circle at center, rgba(250,247,242,0.15) 0%, rgba(30,40,25,0.65) 100%);
     z-index: -1;
     pointer-events: none;
   }
@@ -61,25 +61,25 @@
 
   section{ position: relative; margin-bottom: 40px; }
 
-  /* Element Floating Flower Overlay */
+  /* Bunga Melayang (Scrapbook Layering) */
   .floating-flo {
     position: absolute;
     z-index: 10;
     pointer-events: none;
-    filter: drop-shadow(0 8px 16px rgba(0,0,0,0.15));
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.18));
   }
-  .flo-top-right { top: -20px; right: -15px; width: 120px; transform: rotate(15deg); }
-  .flo-bottom-left { bottom: -25px; left: -15px; width: 130px; transform: rotate(-20deg); }
+  .flo-top-right { top: -25px; right: -20px; width: 130px; transform: rotate(12deg); }
+  .flo-bottom-left { bottom: -30px; left: -20px; width: 140px; transform: rotate(-15deg); }
 
-  /* Frame Lace Doily Container */
+  /* Frame Lace Doily Card */
   .lace-card {
     position: relative;
     background: url('assets/lacepaper.jpg') no-repeat center center;
     background-size: 100% 100%;
-    padding: 90px 45px;
+    padding: 100px 45px;
     text-align: center;
     margin: 0 auto;
-    filter: drop-shadow(0 12px 28px rgba(0,0,0,0.2));
+    filter: drop-shadow(0 15px 35px rgba(0,0,0,0.25));
   }
 
   .lace-content {
@@ -87,21 +87,21 @@
     z-index: 2;
   }
 
-  /* Glass Card untuk Konten Bawah */
+  /* Glassmorphism Card */
   .glass-card {
-    background: rgba(250, 247, 242, 0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    border-radius: 24px;
-    padding: 32px 24px;
+    background: rgba(250, 247, 242, 0.88);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 28px;
+    padding: 36px 24px;
     text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.15);
   }
 
   .eyebrow{
     font-size: 10px;
-    letter-spacing: 0.28em;
+    letter-spacing: 0.3em;
     color: var(--sage);
     font-weight: 600;
     text-transform: uppercase;
@@ -109,10 +109,10 @@
 
   h1{
     font-family: var(--cursive);
-    font-size: clamp(46px, 12vw, 64px);
+    font-size: clamp(48px, 13vw, 68px);
     color: var(--sage-dark);
-    line-height: 1.1;
-    margin: 6px 0;
+    line-height: 1.05;
+    margin: 4px 0;
   }
 
   h2{
@@ -126,73 +126,71 @@
     background: var(--sage-dark);
     color: var(--cream);
     border: none;
-    padding: 12px 30px;
+    padding: 13px 32px;
     border-radius: 50px;
     font-family: var(--sans);
     font-size: 11px;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.2em;
     cursor: pointer;
-    box-shadow: 0 4px 15px rgba(59,71,52,0.3);
+    box-shadow: 0 4px 18px rgba(59,71,52,0.35);
     transition: all 0.3s ease;
-    margin-top: 16px;
+    margin-top: 18px;
   }
   .btn-coquette:hover {
     background: var(--sage);
     transform: translateY(-2px);
   }
 
-  /* Scroll Reveal */
+  /* Animations */
   .reveal{
     opacity:0; transform:translateY(24px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .reveal.in-view{ opacity:1; transform:translateY(0); }
 
-  /* Cover Gate */
+  /* Gate Overlay */
   #gate{
     position: fixed; inset: 0; z-index: 100;
-    background: rgba(26, 34, 24, 0.7);
-    backdrop-filter: blur(8px);
+    background: rgba(22, 28, 20, 0.75);
+    backdrop-filter: blur(10px);
     display: flex; align-items: center; justify-content: center;
     padding: 20px;
     transition: opacity 0.8s ease, visibility 0.8s ease;
   }
   #gate.hidden{ opacity:0; visibility:hidden; pointer-events:none; }
 
-  /* Photo Oval */
+  /* Photo Oval Frame */
   .photo-oval {
-    width: 140px; height: 180px;
+    width: 135px; height: 175px;
     border-radius: 100px;
     overflow: hidden;
     margin: 0 auto 12px;
     border: 3px solid var(--cream);
-    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
   }
   .photo-oval img { width: 100%; height: 100%; object-fit: cover; }
 
-  /* Grid 3 Col Detail */
   .grid-3 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
+    gap: 10px;
     margin-top: 20px;
   }
   .grid-box {
-    background: rgba(255,255,255,0.5);
-    padding: 14px 8px;
+    background: rgba(255,255,255,0.6);
+    padding: 12px 6px;
     border-radius: 16px;
-    border: 1px solid rgba(255,255,255,0.8);
+    border: 1px solid rgba(255,255,255,0.9);
   }
 
-  /* Music Button Floating */
   #musicToggle{
     position: fixed; right: 20px; bottom: 20px; z-index: 60;
-    width: 44px; height: 44px; border-radius: 50%;
+    width: 46px; height: 46px; border-radius: 50%;
     background: var(--cream); color: var(--sage-dark);
     border: 1px solid rgba(0,0,0,0.08);
     display: flex; align-items: center; justify-content: center;
     cursor: pointer; opacity: 0; visibility: hidden; transition: 0.4s;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
   }
   #musicToggle.show { opacity: 1; visibility: visible; }
   #musicToggle .icon-pause { display: none; }
@@ -204,7 +202,7 @@
 <body>
 
 <!-- BACKGROUND PICTURE LANDSCAPE -->
-<img src="assets/land.jpg" class="site-bg" alt="Background">
+<img src="assets/land.jpg" class="site-bg" alt="Background">[cite: 4]
 <div class="bg-overlay"></div>
 
 <!-- MUSIK PLAYER -->
@@ -214,18 +212,17 @@
   <svg class="icon-pause" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
 </button>
 
-<!-- COVER GATE (LACE PAPER) -->
+<!-- COVER GATE -->
 <div id="gate">
   <div class="wrap" style="width: 100%;">
     <div class="lace-card">
-      <!-- Bunga melayang dari sheet flo.jpg (dicutting jadi PNG) -->
       <img src="assets/flo-1.png" class="floating-flo flo-top-right" alt="Flower">
       
       <div class="lace-content">
-        <span class="eyebrow">The Wedding Of</span>
+        <span class="eyebrow">YOU ARE INVITED TO</span>
         <h1>Azizah &amp; Valdy</h1>
-        <p style="font-size: 11px; letter-spacing: 0.15em; color: var(--sage); margin-top: 14px;">DEAR OUR GUEST,</p>
-        <p id="guestName" style="font-family: var(--serif); font-size: 20px; font-weight: 600; color: var(--sage-dark); margin-bottom: 8px;">Tamu Undangan</p>
+        <p style="font-size: 10px; letter-spacing: 0.2em; color: var(--sage); margin-top: 16px;">DEAR SPECIAL GUEST,</p>
+        <p id="guestName" style="font-family: var(--serif); font-size: 22px; font-weight: 600; color: var(--sage-dark); margin-bottom: 6px;">Tamu Undangan</p>
         <button id="openBtn" class="btn-coquette" type="button">OPEN INVITATION 𝜗𝜚</button>
       </div>
 
@@ -235,7 +232,7 @@
 </div>
 
 <!-- MAIN CONTENT -->
-<div class="wrap" style="padding-top: 40px; padding-bottom: 60px;">
+<div class="wrap" style="padding-top: 30px; padding-bottom: 60px;">
 
   <!-- HERO SECTION -->
   <section id="hero">
@@ -245,7 +242,7 @@
       <div class="lace-content">
         <span class="eyebrow">SAVE THE DATE</span>
         <h1>Azizah &amp; Valdy</h1>
-        <p style="font-family: var(--serif); font-size: 16px; color: var(--sage-dark); letter-spacing: 0.1em; margin-top: 6px;">31 . 01 . 2027</p>
+        <p style="font-family: var(--serif); font-size: 18px; color: var(--sage-dark); letter-spacing: 0.12em; margin-top: 6px;">31 . 01 . 2027</p>
       </div>
 
       <img src="assets/flo-1.png" class="floating-flo flo-bottom-left" alt="Flower">
@@ -255,25 +252,25 @@
   <!-- COUPLE SECTION -->
   <section id="couple" class="reveal">
     <div class="glass-card" style="position: relative;">
-      <img src="assets/flo-2.png" class="floating-flo flo-top-right" style="width: 90px;" alt="Flower">
+      <img src="assets/flo-2.png" class="floating-flo flo-top-right" style="width: 95px;" alt="Flower">
 
-      <span class="eyebrow" style="margin-bottom: 20px; display: block;">THE BRIDE &amp; GROOM</span>
+      <span class="eyebrow" style="margin-bottom: 22px; display: block;">THE BRIDE &amp; GROOM</span>
       
       <div style="display: flex; flex-direction: column; gap: 28px;">
         <div>
           <div class="photo-oval"><img src="assets/bride.jpg" alt="Azizah"></div>
           <h2>Azizah Zafira</h2>
-          <p style="font-size: 12px; color: var(--sage); font-weight: 600;">AZIZAH</p>
-          <p style="font-size: 12px; opacity: 0.8; margin-top: 4px;">Putri dari Bpk. Chaidir Rusli &amp; Ibu Hasanah</p>
+          <p style="font-size: 11px; color: var(--sage); font-weight: 600; letter-spacing: 0.15em;">AZIZAH</p>
+          <p style="font-size: 12px; opacity: 0.85; margin-top: 4px;">Putri dari Bpk. Chaidir Rusli &amp; Ibu Hasanah</p>
         </div>
 
-        <div style="font-family: var(--cursive); font-size: 36px; color: var(--sage);">and</div>
+        <div style="font-family: var(--cursive); font-size: 40px; color: var(--sage); margin: -10px 0;">and</div>
 
         <div>
           <div class="photo-oval"><img src="assets/groom.jpg" alt="Valdy"></div>
           <h2>Livaldy Alviano Z.</h2>
-          <p style="font-size: 12px; color: var(--sage); font-weight: 600;">VALDY</p>
-          <p style="font-size: 12px; opacity: 0.8; margin-top: 4px;">Putra dari Alm. H. Zulkarnaen A. &amp; Alm. Evacornelly TZ</p>
+          <p style="font-size: 11px; color: var(--sage); font-weight: 600; letter-spacing: 0.15em;">VALDY</p>
+          <p style="font-size: 12px; opacity: 0.85; margin-top: 4px;">Putra dari Alm. H. Zulkarnaen A. &amp; Alm. Evacornelly TZ</p>
         </div>
       </div>
     </div>
@@ -283,24 +280,24 @@
   <section id="event" class="reveal">
     <div class="glass-card">
       <span class="eyebrow">WEDDING DETAILS</span>
-      <h2 style="margin-top: 4px;">Minggu, 31 Januari 2027</h2>
+      <h2 style="margin-top: 4px; font-size: 24px;">Minggu, 31 Januari 2027</h2>
       
       <div class="grid-3">
         <div class="grid-box">
-          <p style="font-size: 10px; color: var(--sage); font-weight: 600;">AKAD NIKAH</p>
+          <p style="font-size: 9px; color: var(--sage); font-weight: 600; letter-spacing: 0.1em;">AKAD NIKAH</p>
           <p style="font-size: 12px; font-weight: 600; margin-top: 2px;">09.00 WIB</p>
         </div>
         <div class="grid-box">
-          <p style="font-size: 10px; color: var(--sage); font-weight: 600;">RESEPSI</p>
+          <p style="font-size: 9px; color: var(--sage); font-weight: 600; letter-spacing: 0.1em;">RESEPSI</p>
           <p style="font-size: 12px; font-weight: 600; margin-top: 2px;">11.00 WIB</p>
         </div>
         <div class="grid-box">
-          <p style="font-size: 10px; color: var(--sage); font-weight: 600;">LOKASI</p>
-          <p style="font-size: 11px; font-weight: 600; margin-top: 2px;">Masjid An-Noor</p>
+          <p style="font-size: 9px; color: var(--sage); font-weight: 600; letter-spacing: 0.1em;">LOKASI</p>
+          <p style="font-size: 10px; font-weight: 600; margin-top: 2px;">Masjid An-Noor</p>
         </div>
       </div>
 
-      <a href="https://share.google/lmkwAqGa8eLUfHFtO" target="_blank" class="btn-coquette">OPEN GOOGLE MAPS 📍</a>
+      <a href="https://share.google/lmkwAqGa8eLUfHFtO" target="_blank" class="btn-coquette">LOCATION MAP 📍</a>
     </div>
   </section>
 
@@ -310,19 +307,19 @@
       <span class="eyebrow">WEDDING GIFT</span>
       <p style="font-size: 12px; opacity: 0.85; margin: 8px 0 16px;">Doa restu Anda adalah karunia terindah. Namun jika ingin mengirimkan tanda kasih, dapat melalui:</p>
       
-      <div style="background: rgba(255,255,255,0.7); padding: 16px; border-radius: 16px; border: 1px dashed var(--sage);">
-        <p style="font-size: 11px; font-weight: 600; color: var(--sage);">BANK BCA</p>
-        <p style="font-family: var(--serif); font-size: 22px; font-weight: 600; color: var(--sage-dark);" id="rekNum">3450 5721 19</p>
+      <div style="background: rgba(255,255,255,0.75); padding: 18px; border-radius: 20px; border: 1px dashed var(--sage);">
+        <p style="font-size: 11px; font-weight: 600; color: var(--sage); letter-spacing: 0.12em;">BANK BCA</p>
+        <p style="font-family: var(--serif); font-size: 24px; font-weight: 600; color: var(--sage-dark);" id="rekNum">3450 5721 19</p>
         <p style="font-size: 11px; opacity: 0.8;">a.n. Azizah Zafira</p>
-        <button class="btn-coquette" id="copyBtn" data-raw="3450572119" style="padding: 8px 20px; font-size: 10px; margin-top: 10px;">COPY ACCOUNT</button>
+        <button class="btn-coquette" id="copyBtn" data-raw="3450572119" style="padding: 9px 22px; font-size: 10px; margin-top: 10px;">COPY ACCOUNT</button>
       </div>
     </div>
   </section>
 
   <!-- CLOSING -->
   <section id="closing" class="reveal" style="text-align: center;">
-    <span class="eyebrow">SEE YOU ON OUR DAY</span>
-    <p style="font-family: var(--cursive); font-size: 38px; color: var(--cream); text-shadow: 0 2px 8px rgba(0,0,0,0.4); margin: 8px 0;">#ZahFoundHerLIV</p>
+    <span class="eyebrow" style="color: var(--cream);">SEE YOU ON OUR DAY</span>
+    <p style="font-family: var(--cursive); font-size: 42px; color: var(--cream); text-shadow: 0 2px 10px rgba(0,0,0,0.5); margin: 6px 0;">#ZahFoundHerLIV</p>
     <p style="font-size: 12px; color: var(--cream); opacity: 0.9;">Azizah &amp; Valdy</p>
   </section>
 
@@ -330,12 +327,10 @@
 
 <script src="https://www.youtube.com/iframe_api"></script>
 <script>
-  // Guest Name Query
   var params = new URLSearchParams(window.location.search);
   var guest = params.get('to');
   if(guest){ document.getElementById('guestName').textContent = decodeURIComponent(guest); }
 
-  // YouTube Background Audio
   var ytPlayer = null, wantsPlay = false;
   var musicToggle = document.getElementById('musicToggle');
 
@@ -366,7 +361,6 @@
     if(ytPlayer && ytPlayer.playVideo){ ytPlayer.playVideo(); }
   });
 
-  // Reveal Observer
   if('IntersectionObserver' in window){
     var observer = new IntersectionObserver(function(entries){
       entries.forEach(function(entry){
@@ -378,7 +372,6 @@
     document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in-view'); });
   }
 
-  // Copy Rekening
   var copyBtn = document.getElementById('copyBtn');
   copyBtn.addEventListener('click', function(){
     var raw = copyBtn.getAttribute('data-raw');
